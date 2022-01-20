@@ -48,7 +48,7 @@
                 }
             })
             console.log(arTimes);
-        }new Client(nome, telefone)
+        }
     }
     init();
 </script>
