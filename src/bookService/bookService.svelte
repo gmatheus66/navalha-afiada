@@ -1,5 +1,5 @@
 <script>
-    // import Client from "./Client.js";
+    import {Client} from "./Client.js";
     import {
         Button,
         Card,
@@ -40,8 +40,15 @@
     let openModal = () => {
         modal = !modal;
     }
-    let addSchedule = () => {
-        // console.log(new Client("testnome", "testtelefone"));
+    let addSchedule = (t) => {
+        if(nome && telefone){
+            arTimes.forEach(e =>{
+                if(e.time == t.time){
+                    e.schedules.push(new Client(nome, telefone))
+                }
+            })
+            console.log(arTimes);
+        }new Client(nome, telefone)
     }
     init();
 </script>
@@ -61,14 +68,12 @@
                 <CardSubtitle>schedules</CardSubtitle>
                 {#each t.schedules as schedule}
                     <CardText>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
+                        {schedule}
                     </CardText>
                 {/each}
-                <Button on:click={() => openModal()} color='success'>Adicionar</Button>
+                <Button on:click={() => openModal()} color='success'>Cadastrar</Button>
                 {#if modal}
                 <div>
-                    <h3>Teste</h3>
                     <Form>
                         <FormGroup>
                           <Label for="Nome">Nome</Label>
@@ -78,7 +83,7 @@
                           <Label for="Telefone">Telefone: </Label>
                           <Input plaintext bind:this={telefone}/>
                         </FormGroup>
-                        <Button on:click={() => addSchedule()} color='success'>Adicionar</Button>
+                        <Button on:click={() => addSchedule(t) } color='success'>Adicionar</Button>
                     </Form>
                 </div>
                 {/if}
